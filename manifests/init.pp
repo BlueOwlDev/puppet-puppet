@@ -486,6 +486,9 @@
 # $server_use_legacy_auth_conf::            Should the puppetserver use the legacy puppet auth.conf?
 #                                           Defaults to false (the puppetserver will use its own conf.d/auth.conf)
 #
+# $server_alternate_auth_template:          Alternate auth.conf template path
+#                                           Defaults to null
+#
 # $server_check_for_updates::               Should the puppetserver phone home to check for available updates?
 #                                           Defaults to true
 #
@@ -750,6 +753,7 @@ class puppet (
   Integer[0] $server_max_queued_requests = $puppet::params::server_max_queued_requests,
   Integer[0] $server_max_retry_delay = $puppet::params::server_max_retry_delay,
   Boolean $server_use_legacy_auth_conf = $puppet::params::server_use_legacy_auth_conf,
+  String $server_alternate_auth_template = $puppet::params::server_alternate_auth_template,
   Boolean $server_check_for_updates = $puppet::params::server_check_for_updates,
   Boolean $server_environment_class_cache_enabled = $puppet::params::server_environment_class_cache_enabled,
   Boolean $server_allow_header_cert_info = $puppet::params::server_allow_header_cert_info,

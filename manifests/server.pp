@@ -303,6 +303,9 @@
 # $use_legacy_auth_conf::              Should the puppetserver use the legacy puppet auth.conf?
 #                                      Defaults to false (the puppetserver will use its own conf.d/auth.conf)
 #
+# $alternate_auth_template:            Alternate auth.conf template path
+#                                      Defaults to null
+#
 # $allow_header_cert_info::            Allow client authentication over HTTP Headers
 #                                      Defaults to false, is also activated by the $http setting
 #
@@ -446,6 +449,7 @@ class puppet::server(
   Integer[0] $max_queued_requests = $puppet::server_max_queued_requests,
   Integer[0] $max_retry_delay = $puppet::server_max_retry_delay,
   Boolean $use_legacy_auth_conf = $::puppet::server_use_legacy_auth_conf,
+  String $alternate_auth_template = $::puppet::server_alternate_auth_template,
   Boolean $check_for_updates = $::puppet::server_check_for_updates,
   Boolean $environment_class_cache_enabled = $::puppet::server_environment_class_cache_enabled,
   Boolean $allow_header_cert_info = $::puppet::server_allow_header_cert_info,

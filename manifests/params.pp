@@ -448,6 +448,9 @@ class puppet::params {
   # Puppetserver >= 2.2 Which auth.conf shall we use?
   $server_use_legacy_auth_conf      = false
 
+  # Allow alternate auth.conf template
+  $server_alternate_auth_template   = '' # lint:ignore:empty_string_assignment
+
   # For Puppetserver, certain configuration parameters are version specific. We assume a particular version here.
   if versioncmp($::puppetversion, '5.5.7') >= 0 {
     $server_puppetserver_version = '5.3.6'

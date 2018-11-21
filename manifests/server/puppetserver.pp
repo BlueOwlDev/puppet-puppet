@@ -108,6 +108,7 @@ class puppet::server::puppetserver (
   $server_admin_api_whitelist             = $::puppet::server::admin_api_whitelist,
   $server_puppetserver_version            = $::puppet::server::puppetserver_version,
   $server_use_legacy_auth_conf            = $::puppet::server::use_legacy_auth_conf,
+  $server_alternate_auth_template         = $::puppet::server::alternate_auth_template,
   $server_check_for_updates               = $::puppet::server::check_for_updates,
   $server_environment_class_cache_enabled = $::puppet::server::environment_class_cache_enabled,
   $server_jruby9k                         = $::puppet::server::puppetserver_jruby9k,
@@ -290,9 +291,13 @@ class puppet::server::puppetserver (
     content => template('puppet/server/puppetserver/conf.d/puppetserver.conf.erb'),
   }
 
+  $auth_conf_template = $server_alternate_auth_template ? {
+    ''      => 'puppet/server/puppetserver/conf.d/auth.conf.erb',
+    default => $server_alternate_auth_template
+  }
   file { "${server_puppetserver_dir}/conf.d/auth.conf":
     ensure  => file,
-    content => template('puppet/server/puppetserver/conf.d/auth.conf.erb'),
+    content => template($auth_conf_template),
   }
 
   file { "${server_puppetserver_dir}/conf.d/webserver.conf":
